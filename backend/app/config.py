@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 from typing import Optional
 from pydantic_settings import BaseSettings
 
@@ -8,11 +7,12 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./data/resumes.db"
     
     # Gemini API
-    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_API_KEY: Optional[str] = os.getenv("GEMINI_API_KEY", "")
     
-    # Model settings
+    # Model settings - Use gemini-pro instead of gemini-1.5-flash
     MODEL_NAME: str = "all-MiniLM-L6-v2"
     SPACY_MODEL: str = "en_core_web_sm"
+    GEMINI_MODEL: str = "gemini-pro"  # Updated to the correct model name
     
     # Matching weights
     SKILL_WEIGHT: float = 0.5
@@ -27,7 +27,6 @@ class Settings(BaseSettings):
     ALLOWED_EXTENSIONS: list = [".pdf", ".txt"]
     
     class Config:
-        # Look for .env in the project root (parent of backend folder)
         env_file = "../.env"
         env_file_encoding = "utf-8"
         case_sensitive = True

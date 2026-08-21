@@ -15,7 +15,7 @@ from .gemini import gemini_client
 from .database import db
 from .utils import generate_session_id
 
-app = FastAPI(title="Smart Resume Screener", version="1.0.0")
+app = FastAPI(title="Zest API", version="1.0.0")
 
 # CORS middleware
 app.add_middleware(
@@ -35,7 +35,8 @@ async def root():
     return {
         "message": "Smart Resume Screener API",
         "version": "1.0.0",
-        "status": "running"
+        "status": "running",
+        "gemini_enabled": gemini_client.enabled
     }
 
 @app.post("/analyze", response_model=UploadResponse)
