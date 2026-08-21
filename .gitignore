@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+.env.example  # Optional: also ignore example if it might contain keys
+!*.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+# Logs
+*.log
+logs/
+
+# ML Models
+models/
+*.pkl
+*.joblib
+*.h5
+*.pt
+
+# Docker
+*.pid
+*.pid.lock
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Data
+data/resumes.db
+data/sample_resumes/
+
+# Dist
+dist/
+build/
+*.egg-info/
+
+# Coverage
+.coverage
+htmlcov/
