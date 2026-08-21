@@ -1,0 +1,30 @@
+# ===== PYTHON VERSION REQUIREMENT =====
+# This forces Python 3.11
+
+# ===== BACKEND =====
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+pymupdf==1.23.8
+spacy==3.7.2
+sentence-transformers==2.2.2
+torch==2.1.0
+transformers==4.35.0
+sqlalchemy==2.0.23
+google-generativeai==0.3.2
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+numpy==1.24.4
+fastapi-cors==0.0.6
+email-validator==2.1.0
+
+# ===== FRONTEND =====
+streamlit==1.29.0
+plotly==5.18.0
+pandas==2.0.3
+requests==2.31.0
+pillow==9.5.0
+
+# ===== SKILL TAXONOMY (Use built-in skills instead) =====
+# skills package removed - using built-in skill list
