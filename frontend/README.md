@@ -123,44 +123,6 @@ Frontend: Render Static Site
 Backend: Render Web Service
 Source Code: GitHub
 Resume Processing Pipeline
-
-The resume processing workflow is:
-
-    Resume Upload
-      ↓
-PDF/TXT Parsing
-      ↓
-Raw Resume Text
-      ↓
-Information Extraction
-      ↓
-Candidate Profile
-      │
-      ├── Name
-      ├── Email
-      ├── Phone
-      ├── Skills
-      ├── Experience
-      ├── Education
-      ├── Companies
-      └── Certifications
-      ↓
-Job Description Processing
-      ↓
-Requirement Extraction
-      ↓
-Candidate Matching
-      ↓
-Weighted Match Score
-      ↓
-Shortlist Decision
-      ↓
-Gemini Assessment
-      ↓
-Database Storage
-      ↓
-Results / History
-
       
 
 RAISE calculates the candidate's overall match using three major components:
@@ -250,38 +212,13 @@ The structured matching system calculates reproducible scores using skills, expe
 Gemini then converts the structured results into a readable recruitment assessment.
 This separation makes the scoring process easier to understand while still providing an AI-generated explanation.
 
-Authentication Flow
-User
- ↓
-Register
- ↓
-Password Hashing
- ↓
-SQLite users table
- ↓
-Login
- ↓
-JWT Access Token
- ↓
-Protected Routes
- ↓
-Role Validation
- ↓
-Recruiter / Individual Dashboard
-API Overview
-Authentication
-POST /auth/register
-POST /auth/login
-GET  /auth/me
-Resume Analysis
-POST /analyze
 
-Analyzes a single resume.
+1. Analyzes a single resume.
 
 Batch Screening
 POST /shortlist
 
-Analyzes multiple resumes and returns ranked candidates.
+2. Analyzes multiple resumes and returns ranked candidates.
 
 Results
 GET /analyses/{session_id}
