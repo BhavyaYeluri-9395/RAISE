@@ -16,9 +16,6 @@ class ResumeExtractor:
 
     def __init__(self):
 
-        # ============================================================
-        # LOAD SPACY MODEL
-        # ============================================================
 
         try:
             self.nlp = spacy.load("en_core_web_sm")
@@ -39,9 +36,6 @@ class ResumeExtractor:
 
             self.nlp = spacy.load("en_core_web_sm")
 
-        # ============================================================
-        # LOAD SKILLS PACKAGE
-        # ============================================================
 
         try:
             from skills import SkillLibrary
@@ -59,9 +53,6 @@ class ResumeExtractor:
 
             self._init_fallback_skills()
 
-    # ================================================================
-    # FALLBACK SKILLS
-    # ================================================================
 
     def _init_fallback_skills(self):
 
@@ -179,9 +170,6 @@ class ResumeExtractor:
             "microsoft excel"
         ]
 
-    # ================================================================
-    # CANDIDATE NAME EXTRACTION
-    # ================================================================
 
     def extract_candidate_name(
         self,
@@ -201,9 +189,6 @@ class ResumeExtractor:
         if not text:
             return None
 
-        # ------------------------------------------------------------
-        # Normalize text
-        # ------------------------------------------------------------
 
         text = text.replace("\r", "\n")
 
@@ -216,9 +201,6 @@ class ResumeExtractor:
         if not lines:
             return None
 
-        # ------------------------------------------------------------
-        # Resume section headings
-        # ------------------------------------------------------------
 
         ignored_lines = {
             "resume",
@@ -262,10 +244,6 @@ class ResumeExtractor:
             "academic background"
         }
 
-        # ------------------------------------------------------------
-        # Technology / skill words that must NEVER be accepted
-        # as part of a candidate name.
-        # ------------------------------------------------------------
 
         technical_terms = {
             "apache",
@@ -378,9 +356,7 @@ class ResumeExtractor:
 
             candidate_lower = candidate.lower()
 
-            # --------------------------------------------------------
-            # Basic rejection
-            # --------------------------------------------------------
+
 
             if candidate_lower in ignored_lines:
                 return False
@@ -446,9 +422,6 @@ class ResumeExtractor:
             ):
                 return False
 
-            # --------------------------------------------------------
-            # Reject common resume phrases
-            # --------------------------------------------------------
 
             bad_phrases = [
 
