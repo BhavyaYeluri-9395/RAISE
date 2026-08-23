@@ -184,7 +184,6 @@ LLM Usage
 Gemini is used to provide an explainable natural-language assessment after the structured matching stage.
 
 The application provides the LLM with:
-
 Candidate information
 Extracted skills
 Experience
@@ -197,10 +196,8 @@ Missing skills
 
 The LLM then generates a recruiter-facing explanation.
 
-Prompt Structure
-
+Prompt Structure:
 A representative prompt structure is:
-
 You are an AI recruitment assistant.
 
 Analyze the candidate against the provided job description.
@@ -246,14 +243,10 @@ Keep the response concise and useful to a recruiter.
 
 The assignment itself recommends using an LLM for semantic comparison and gives the example of comparing a resume with a job description and providing a fit rating with justification.
 
-Why LLM and deterministic matching are both used
-
+Why LLM and deterministic matching are both used?
 RAISE separates numerical scoring from natural-language explanation.
-
 The structured matching system calculates reproducible scores using skills, experience and education.
-
 Gemini then converts the structured results into a readable recruitment assessment.
-
 This separation makes the scoring process easier to understand while still providing an AI-generated explanation.
 
 Authentication Flow
