@@ -230,7 +230,8 @@ GET /health
 
 
 
-**Deployment**
+**Deployment** :
+
 The application is deployed as two services.
 
 Frontend
