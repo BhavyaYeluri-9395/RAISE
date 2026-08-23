@@ -1,8 +1,8 @@
 # Create README.md with basic content
 cat > README.md << 'EOF'
-# Smart Resume Screener
+# RAISE — Resume Analysis & Intelligent Screening Engine
 
-Intelligently parse resumes, extract skills, and match them with job descriptions using AI.
+RAISE is an AI-assisted resume analysis and candidate screening platform that helps recruiters evaluate candidates against job requirements and helps individuals understand how well their resume matches a target role.
 
 ## 🚀 Features
 
@@ -35,11 +35,7 @@ Intelligently parse resumes, extract skills, and match them with job description
 ### Prerequisites
 - Python 3.11+
 - Gemini API Key (free from Google AI Studio)
-
-
-# RAISE — Resume Analysis & Intelligent Screening Engine
-
-RAISE is an AI-assisted resume analysis and candidate screening platform that helps recruiters evaluate candidates against job requirements and helps individuals understand how well their resume matches a target role.
+  
 
 ## Features
 
