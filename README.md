@@ -1,5 +1,4 @@
-# Create README.md with basic content
-cat > README.md << 'EOF'
+
 # RAISE — Resume Analysis & Intelligent Screening Engine
 
 RAISE is an AI-assisted resume analysis and candidate screening platform that helps recruiters evaluate candidates against job requirements and helps individuals understand how well their resume matches a target role.
