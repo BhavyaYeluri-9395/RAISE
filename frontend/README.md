@@ -39,6 +39,7 @@ RAISE is an AI-assisted resume analysis and candidate screening platform that he
 # System Architecture
 
 RAISE follows a client-server architecture.
+
                          ┌─────────────────────────┐
                          │       RAISE USER        │
                          │ Recruiter / Individual  │
