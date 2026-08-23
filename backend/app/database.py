@@ -31,19 +31,11 @@ class Database:
         self._init_db()
 
 
-    # ============================================================
-    # DATABASE INITIALIZATION
-    # ============================================================
-
     def _init_db(self):
 
         with self.get_connection() as conn:
 
             cursor = conn.cursor()
-
-            # ====================================================
-            # USERS TABLE
-            # ====================================================
 
             cursor.execute(
                 """
@@ -65,10 +57,6 @@ class Database:
                 """
             )
 
-
-            # ====================================================
-            # RESUMES / ANALYSES TABLE
-            # ====================================================
 
             cursor.execute(
                 """
@@ -122,18 +110,6 @@ class Database:
                 """
             )
 
-
-            # ====================================================
-            # MIGRATION FOR OLD DATABASES
-            # ====================================================
-            #
-            # If resumes.db already existed before user_id /
-            # threshold were added, CREATE TABLE IF NOT EXISTS
-            # will NOT add the columns.
-            #
-            # These ALTER statements safely add them.
-            # ====================================================
-
             existing_columns = {
                 row["name"]
                 for row in cursor.execute(
@@ -162,9 +138,6 @@ class Database:
                 )
 
 
-            # ====================================================
-            # INDEXES
-            # ====================================================
 
             cursor.execute(
                 """
@@ -222,11 +195,6 @@ class Database:
 
             conn.commit()
 
-
-    # ============================================================
-    # CONNECTION
-    # ============================================================
-
     @contextmanager
     def get_connection(self):
 
@@ -244,10 +212,6 @@ class Database:
 
             conn.close()
 
-
-    # ============================================================
-    # USER MANAGEMENT
-    # ============================================================
 
     def create_user(
         self,
@@ -349,10 +313,6 @@ class Database:
             return None
 
 
-    # ============================================================
-    # SAVE ANALYSIS
-    # ============================================================
-
     def save_analysis(
         self,
         job_description: JobDescription,
@@ -367,10 +327,6 @@ class Database:
 
             cursor = conn.cursor()
 
-
-            # ----------------------------------------------------
-            # EDUCATION → JSON
-            # ----------------------------------------------------
 
             education_json = json.dumps(
                 [
@@ -387,20 +343,11 @@ class Database:
             )
 
 
-            # ----------------------------------------------------
-            # SKILLS
-            # ----------------------------------------------------
-
             skills_json = json.dumps(
                 resume_data.skills
                 if resume_data.skills
                 else []
             )
-
-
-            # ----------------------------------------------------
-            # COMPANIES
-            # ----------------------------------------------------
 
             companies_json = json.dumps(
                 resume_data.companies
@@ -409,9 +356,6 @@ class Database:
             )
 
 
-            # ----------------------------------------------------
-            # CERTIFICATIONS
-            # ----------------------------------------------------
 
             certifications_json = json.dumps(
                 resume_data.certifications
@@ -419,10 +363,6 @@ class Database:
                 else []
             )
 
-
-            # ----------------------------------------------------
-            # SAVE
-            # ----------------------------------------------------
 
             cursor.execute(
                 """
@@ -518,10 +458,6 @@ class Database:
             return cursor.lastrowid
 
 
-    # ============================================================
-    # GET SINGLE ANALYSIS
-    # ============================================================
-
     def get_analysis_by_id(
         self,
         analysis_id: int,
@@ -569,9 +505,6 @@ class Database:
             return None
 
 
-    # ============================================================
-    # GET ANALYSES BY SESSION
-    # ============================================================
 
     def get_analyses_by_session(
         self,
@@ -620,10 +553,6 @@ class Database:
                 for row in rows
             ]
 
-
-    # ============================================================
-    # GET SHORTLISTED CANDIDATES
-    # ============================================================
 
     def get_shortlisted_candidates(
         self,
@@ -674,10 +603,6 @@ class Database:
                 for row in rows
             ]
 
-
-    # ============================================================
-    # GET RECRUITER SCREENING HISTORY
-    # ============================================================
 
     def get_screening_history(
         self,
@@ -748,10 +673,6 @@ class Database:
             return history
 
 
-    # ============================================================
-    # GET INDIVIDUAL USER ANALYSIS HISTORY
-    # ============================================================
-
     def get_analyses_by_user(
         self,
         user_id: int,
@@ -816,11 +737,6 @@ class Database:
                 dict(row)
                 for row in rows
             ]
-
-
-    # ============================================================
-    # GET INDIVIDUAL DASHBOARD SUMMARY
-    # ============================================================
 
     def get_user_analysis_summary(
         self,
@@ -893,8 +809,5 @@ class Database:
             }
 
 
-# ============================================================
-# GLOBAL DATABASE INSTANCE
-# ============================================================
 
 db = Database()
