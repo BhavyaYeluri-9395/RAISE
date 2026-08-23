@@ -3,7 +3,7 @@
 
 RAISE is an AI-assisted resume analysis and candidate screening platform that helps recruiters evaluate candidates against job requirements and helps individuals understand how well their resume matches a target role.
 
-https://drive.google.com/file/d/1KfIhaHTjVqTz-2pzurBhQwBF1FcdVKLw/view?usp=sharing  - #DEMO VIDEO demonstrating the complete workflow from resume upload and job description processing to candidate ranking and detailed screening results.
+https://drive.google.com/file/d/1KfIhaHTjVqTz-2pzurBhQwBF1FcdVKLw/view?usp=sharing  - DEMO VIDEO demonstrating the complete workflow from resume upload and job description processing to candidate ranking and detailed screening results.
 
 ## Features
 
