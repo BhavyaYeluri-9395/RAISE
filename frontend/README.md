@@ -126,7 +126,7 @@ Resume Processing Pipeline
 
 The resume processing workflow is:
 
-Resume Upload
+    Resume Upload
       ↓
 PDF/TXT Parsing
       ↓
@@ -160,7 +160,7 @@ Gemini Assessment
 Database Storage
       ↓
 Results / History
-Candidate Matching
+
 
 RAISE calculates the candidate's overall match using three major components:
 
@@ -289,3 +289,16 @@ History
 GET /screening-history
 Health
 GET /health
+
+
+
+**Deployment**
+The application is deployed as two services.
+
+Frontend
+React/Vite application deployed as a Render Static Site.
+https://raise-frontend.onrender.com
+
+Backend
+FastAPI application deployed as a Render Web Service.
+https://raise-api.onrender.com
