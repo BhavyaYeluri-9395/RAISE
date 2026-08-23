@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: zest-backend
+    runtime: python
+    repo: https://github.com/BhavyaYeluri-9395/zest
+    plan: free
+    region: oregon
+    buildCommand: |
+      pip install -r backend/requirements.txt
+      python -m spacy download en_core_web_sm
+    startCommand: |
+      cd backend
+      uvicorn app.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
+  - type: web
+    name: zest-frontend
+    runtime: python
+    repo: https://github.com/BhavyaYeluri-9395/zest
+    plan: free
+    region: oregon
+    buildCommand: |
+      pip install -r frontend/requirements.txt
+    startCommand: |
+      streamlit run frontend/app.py --server.port 10000 --server.address 0.0.0.0
+    envVars:
+      - key: BACKEND_URL
+        value: https://zest-backend.onrender.com
+      - key: PYTHON_VERSION
+        value: 3.11.0

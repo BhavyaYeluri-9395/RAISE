@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+*.pyc
 env/
 venv/
 ENV/
@@ -63,3 +64,6 @@ build/
 # Coverage
 .coverage
 htmlcov/
+
+frontend/node_modules/
+frontend/dist/

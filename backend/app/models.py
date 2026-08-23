@@ -68,6 +68,7 @@ class UploadResponse(BaseModel):
     success: bool
     message: str
     analysis_id: Optional[int] = None
+    session_id: Optional[str] = None
     analysis: Optional[AnalysisResponse] = None
 
 class ShortlistRequest(BaseModel):
@@ -78,6 +79,30 @@ class ShortlistRequest(BaseModel):
 
 class ShortlistResponse(BaseModel):
     success: bool
+    session_id: Optional[str] = None
     candidates: List[AnalysisResponse]
     total_candidates: int
     shortlisted_count: int
+class UserCreate(BaseModel):
+    full_name: str
+    email: EmailStr
+    password: str
+    role: str = "individual"
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class UserResponse(BaseModel):
+    id: int
+    full_name: str
+    email: EmailStr
+    role: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserResponse
