@@ -161,6 +161,7 @@ Database Storage
       ↓
 Results / History
 
+      
 
 RAISE calculates the candidate's overall match using three major components:
 
