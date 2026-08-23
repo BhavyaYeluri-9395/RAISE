@@ -12,11 +12,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, List
 from datetime import datetime
 
-
-# ============================================================
-# MODELS
-# ============================================================
-
 from .models import (
     UploadResponse,
     AnalysisResponse,
@@ -30,21 +25,12 @@ from .models import (
 )
 
 
-# ============================================================
-# SERVICES
-# ============================================================
-
 from .parser import PDFParser
 from .extractor import ResumeExtractor
 from .matcher import ResumeMatcher
 from .gemini import gemini_client
 from .database import db
 from .utils import generate_session_id
-
-
-# ============================================================
-# AUTH
-# ============================================================
 
 from .auth import (
     hash_password,
@@ -54,19 +40,10 @@ from .auth import (
 )
 
 
-# ============================================================
-# APP
-# ============================================================
-
 app = FastAPI(
     title="RAISE API",
     version="1.0.0"
 )
-
-
-# ============================================================
-# CORS
-# ============================================================
 
 app.add_middleware(
     CORSMiddleware,
@@ -80,19 +57,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-# ============================================================
-# INITIALIZE COMPONENTS
-# ============================================================
-
 extractor = ResumeExtractor()
 
 matcher = ResumeMatcher()
-
-
-# ============================================================
-# ROOT
-# ============================================================
 
 @app.get("/")
 async def root():
@@ -111,16 +78,6 @@ async def root():
             gemini_client.enabled
     }
 
-
-# ============================================================
-# AUTHENTICATION
-# ============================================================
-
-
-# ------------------------------------------------------------
-# REGISTER
-# ------------------------------------------------------------
-
 @app.post(
     "/auth/register",
     response_model=UserResponse
@@ -129,9 +86,6 @@ async def register(
     user: UserCreate
 ):
 
-    # --------------------------------------------------------
-    # Validate role
-    # --------------------------------------------------------
 
     if user.role not in [
         "individual",
@@ -147,10 +101,7 @@ async def register(
         )
 
 
-    # --------------------------------------------------------
-    # Check duplicate email
-    # --------------------------------------------------------
-
+ 
     existing_user = db.get_user_by_email(
         user.email
     )
@@ -167,18 +118,10 @@ async def register(
         )
 
 
-    # --------------------------------------------------------
-    # Hash password
-    # --------------------------------------------------------
-
     password_hashed = hash_password(
         user.password
     )
 
-
-    # --------------------------------------------------------
-    # Create user
-    # --------------------------------------------------------
 
     try:
 
@@ -201,9 +144,6 @@ async def register(
         )
 
 
-    # --------------------------------------------------------
-    # Response
-    # --------------------------------------------------------
 
     return UserResponse(
         id=user_id,
@@ -212,10 +152,6 @@ async def register(
         role=user.role
     )
 
-
-# ------------------------------------------------------------
-# LOGIN
-# ------------------------------------------------------------
 
 @app.post(
     "/auth/login",
@@ -238,10 +174,6 @@ async def login(
         )
 
 
-    # --------------------------------------------------------
-    # Verify password
-    # --------------------------------------------------------
-
     if not verify_password(
         user.password,
         db_user["password_hash"]
@@ -253,18 +185,10 @@ async def login(
         )
 
 
-    # --------------------------------------------------------
-    # JWT
-    # --------------------------------------------------------
-
     token = create_access_token(
         db_user["id"]
     )
 
-
-    # --------------------------------------------------------
-    # Response
-    # --------------------------------------------------------
 
     return TokenResponse(
 
@@ -281,9 +205,6 @@ async def login(
     )
 
 
-# ------------------------------------------------------------
-# CURRENT USER
-# ------------------------------------------------------------
 
 @app.get(
     "/auth/me",
@@ -302,10 +223,6 @@ async def get_me(
         role=current_user["role"]
     )
 
-
-# ============================================================
-# SINGLE RESUME ANALYSIS
-# ============================================================
 
 @app.post(
     "/analyze",
@@ -335,10 +252,6 @@ async def analyze_resume(
     """
 
     try:
-
-        # ====================================================
-        # VALIDATE FILE
-        # ====================================================
 
         if not file.filename:
 
@@ -376,16 +289,8 @@ async def analyze_resume(
             )
 
 
-        # ====================================================
-        # READ FILE
-        # ====================================================
 
         file_content = await file.read()
-
-
-        # ====================================================
-        # PARSE RESUME
-        # ====================================================
 
         if file_extension == ".pdf":
 
@@ -404,10 +309,6 @@ async def analyze_resume(
             )
 
 
-        # ====================================================
-        # EXTRACT RESUME DATA
-        # ====================================================
-
         extracted_data = (
             extractor.extract_all(
                 resume_text
@@ -419,10 +320,6 @@ async def analyze_resume(
             **extracted_data
         )
 
-
-        # ====================================================
-        # CREATE JD
-        # ====================================================
 
         jd = JobDescription(
 
@@ -459,11 +356,6 @@ async def analyze_resume(
             )
         )
 
-
-        # ====================================================
-        # DEBUG
-        # ====================================================
-
         print(
             "========== SINGLE ANALYSIS =========="
         )
@@ -498,24 +390,12 @@ async def analyze_resume(
             resume_data.experience_years
         )
 
-        print(
-            "======================================"
-        )
-
-
-        # ====================================================
-        # MATCH
-        # ====================================================
 
         match_result = matcher.match(
             resume_data,
             jd
         )
 
-
-        # ====================================================
-        # GEMINI JUSTIFICATION
-        # ====================================================
 
         justification = (
             gemini_client
@@ -532,18 +412,11 @@ async def analyze_resume(
         )
 
 
-        # ====================================================
-        # SESSION
-        # ====================================================
 
         session_id = (
             generate_session_id()
         )
 
-
-        # ====================================================
-        # SAVE ANALYSIS
-        # ====================================================
 
         analysis_id = db.save_analysis(
 
@@ -560,10 +433,6 @@ async def analyze_resume(
             threshold=None
         )
 
-
-        # ====================================================
-        # RESPONSE OBJECT
-        # ====================================================
 
         analysis_response = AnalysisResponse(
 
@@ -608,10 +477,6 @@ async def analyze_resume(
         )
 
 
-# ============================================================
-# MULTIPLE RESUME SCREENING
-# ============================================================
-
 @app.post(
     "/shortlist",
     response_model=ShortlistResponse
@@ -642,9 +507,6 @@ async def shortlist_candidates(
 
     try:
 
-        # ====================================================
-        # VALIDATE THRESHOLD
-        # ====================================================
 
         if threshold is None:
 
@@ -662,9 +524,6 @@ async def shortlist_candidates(
             )
 
 
-        # ====================================================
-        # CREATE SESSION
-        # ====================================================
 
         session_id = (
             generate_session_id()
@@ -674,9 +533,6 @@ async def shortlist_candidates(
         candidates = []
 
 
-        print(
-            "======================================"
-        )
 
         print(
             "MULTI-RESUME SCREENING"
@@ -702,14 +558,7 @@ async def shortlist_candidates(
             threshold
         )
 
-        print(
-            "======================================"
-        )
-
-
-        # ====================================================
-        # PROCESS EACH RESUME
-        # ====================================================
+      
 
         for file in files:
 
@@ -719,10 +568,6 @@ async def shortlist_candidates(
 
 
             try:
-
-                # ------------------------------------------------
-                # FILE VALIDATION
-                # ------------------------------------------------
 
                 allowed_extensions = [
                     ".pdf",
