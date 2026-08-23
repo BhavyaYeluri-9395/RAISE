@@ -223,8 +223,10 @@ POST /shortlist
 Results
 GET /analyses/{session_id}
 GET /shortlisted/{session_id}
+
 History
 GET /screening-history
+
 Health
 GET /health
 
