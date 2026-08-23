@@ -3,16 +3,16 @@
 
 RAISE is an AI-assisted resume analysis and candidate screening platform that helps recruiters evaluate candidates against job requirements and helps individuals understand how well their resume matches a target role.
 
-## 🚀 Features
+## Features
 
-- 📄 **PDF/TXT Resume Parsing** - Extract text from resumes
-- 🎯 **Smart Skill Extraction** - Uses skill taxonomy database
-- 🤖 **Semantic Matching** - AI-powered match scoring
-- 📊 **Interactive Dashboard** - Visual analytics and rankings
-- 💾 **Database Storage** - SQLite for parsed resumes
-- 📝 **AI Justification** - Gemini-powered recommendations
+- **PDF/TXT Resume Parsing** - Extract text from resumes
+- **Smart Skill Extraction** - Uses skill taxonomy database
+- **Semantic Matching** - AI-powered match scoring
+- **Interactive Dashboard** - Visual analytics and rankings
+- **Database Storage** - SQLite for parsed resumes
+- **AI Justification** - Gemini-powered recommendations
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: FastAPI, Python
 - **Frontend**: Streamlit
@@ -20,7 +20,7 @@ RAISE is an AI-assisted resume analysis and candidate screening platform that he
 - **Database**: SQLite
 - **PDF Parsing**: PyMuPDF
 
-## 📋 How It Works
+## How It Works
 
 1. Upload a job description
 2. Upload one or more resumes (PDF/TXT)
@@ -29,7 +29,7 @@ RAISE is an AI-assisted resume analysis and candidate screening platform that he
 5. AI generates professional justification
 6. View results in an interactive dashboard
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.11+
