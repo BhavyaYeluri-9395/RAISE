@@ -1,6 +1,6 @@
 ﻿altair==5.5.0
 annotated-types==0.8.0
-anyio==3.7.1
+anyio==4.8.0
 argon2-cffi==25.1.0
 argon2-cffi-bindings==26.1.0
 attrs==26.1.0
@@ -23,7 +23,7 @@ dnspython==2.8.0
 email-validator==2.1.0
 en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz#sha256=1075c2aa2bc2fee105ab6e90a01a5d1a428c9f5b20a1fa003dc2cb6a438d295e
 environs==15.1.0
-fastapi==0.104.1
+fastapi==0.115.12
 fastapi_cors==0.0.6
 filelock==3.32.3
 fsspec==2026.7.0
